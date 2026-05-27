@@ -19,10 +19,10 @@ const LLMCoverConfigSchema = z.object({
 // 每个模型的真实 maxOutput 来自 providers/<name>.ts 的 InkosModel.maxOutput；
 // 老配置里写的 maxTokens / maxTokensCap 会被 zod strip 静默丢弃（不报错）。
 export const LLMConfigSchema = z.object({
-  provider: z.enum(["anthropic", "openai", "custom"]),
+  provider: z.enum(["anthropic", "openai", "custom", "terminal"]),
   service: z.string().default("custom"),
   configSource: z.enum(["env", "studio"]).default("env"),
-  baseUrl: z.string().url(),
+  baseUrl: z.string().default("http://terminal.internal"),
   apiKey: z.string().default(""),
   model: z.string().min(1),
   proxyUrl: z.string().url().optional(),

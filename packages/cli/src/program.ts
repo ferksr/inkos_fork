@@ -13,6 +13,7 @@ import { exportCommand } from "./commands/export.js";
 import { draftCommand } from "./commands/draft.js";
 import { auditCommand } from "./commands/audit.js";
 import { reviseCommand } from "./commands/revise.js";
+import { settleCommand } from "./commands/settle.js";
 import { agentCommand } from "./commands/agent.js";
 import { planCommand } from "./commands/plan.js";
 import { composeCommand } from "./commands/compose.js";
@@ -74,6 +75,7 @@ export function createProgram(hooks: ProgramHooks = {}): Command {
   program.addCommand(draftCommand);
   program.addCommand(auditCommand);
   program.addCommand(reviseCommand);
+  program.addCommand(settleCommand);
   program.addCommand(agentCommand);
   program.addCommand(planCommand);
   program.addCommand(composeCommand);
