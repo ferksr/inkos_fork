@@ -133,7 +133,7 @@ describe("createStreamMonitor", () => {
 
   it("calls onProgress at interval with correct counts", () => {
     const calls: Array<{ totalChars: number; chineseChars: number; status: string }> = [];
-    const monitor = createStreamMonitor((progress) => {
+    const monitor = createStreamMonitor((progress: any) => {
       calls.push({
         totalChars: progress.totalChars,
         chineseChars: progress.chineseChars,

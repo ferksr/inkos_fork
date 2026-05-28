@@ -99,7 +99,7 @@ export async function resolveEffectiveLLMConfig(
   const provider = typeof llm.provider === "string" ? llm.provider : undefined;
   const baseUrl = typeof llm.baseUrl === "string" ? llm.baseUrl : undefined;
   const apiKey = typeof llm.apiKey === "string" ? llm.apiKey : "";
-  if (!apiKey && input.requireApiKey !== false && !isApiKeyOptionalForEndpoint({ provider, baseUrl })) {
+  if (!apiKey && input.requireApiKey !== false && provider !== "terminal" && !isApiKeyOptionalForEndpoint({ provider, baseUrl })) {
     throw new Error(
       configMode === "studio-project"
         ? "Studio LLM API key not set. Open Studio services and save an API key for the selected service."
@@ -496,9 +496,9 @@ function warnIfStaleTopLevel(
 }
 
 function fillNoopLLMDefaults(llm: Record<string, unknown>): void {
-  if (typeof llm.provider !== "string" || llm.provider.length === 0) llm.provider = "openai";
-  if (typeof llm.baseUrl !== "string" || llm.baseUrl.length === 0) llm.baseUrl = "https://example.invalid/v1";
-  if (typeof llm.model !== "string" || llm.model.length === 0) llm.model = "noop-model";
+  if (typeof llm.provider !== "string" || llm.provider.length === 0) llm.provider = "terminal";
+  if (typeof llm.baseUrl !== "string" || llm.baseUrl.length === 0) llm.baseUrl = "http://terminal.internal";
+  if (typeof llm.model !== "string" || llm.model.length === 0) llm.model = "terminal";
   if (typeof llm.apiKey !== "string") llm.apiKey = "";
 }
 
